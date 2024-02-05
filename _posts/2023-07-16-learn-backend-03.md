@@ -295,6 +295,17 @@ public class LoginFromServlet extends HttpServlet {
 
 따라서 기본 생성자만 생성할 수 있고 필드값 주입은 `init()` 에서 한다.
 
+>1. DD 를 읽어들임
+>2. Servlet 생성 container 부터 호출
+>3. init() calling ...  ======= READY ON START
+>4. req, res thread 객체 생성
+>5. service() ---> doGet() , doPost() 재호출
+>6. doGet() , doPost() 응답 완료
+>7. req, res, thread 객체가 메모리에서 unbind... death ======= READY ON END
+>8. destroy() 호출
+>9. servlet death
+
+
 <br/>
 
 ```java
