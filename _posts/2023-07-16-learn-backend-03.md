@@ -294,3 +294,170 @@ public class LoginFromServlet extends HttpServlet {
 {: .prompt-warning}
 
 따라서 기본 생성자만 생성할 수 있고 필드값 주입은 `init()` 에서 한다.
+
+<br/>
+
+```java
+package web.servlet.life;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Life")
+public class LifeCycleServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    //필드
+	private int count=0;
+    
+    public LifeCycleServlet() {
+        System.out.println("1.servlet 인스턴스 생성...default로 ....");
+    }
+
+    @Override
+    public void init() throws ServletException {
+        System.out.println("2.init calling...by Container");
+
+    }
+    
+    @Override
+    public void destroy() {
+    	System.out.println("4. Servlet Instance Undind by container");
+    }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response);
+	}
+	
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+    System.out.println("3. service ...doGet(), doPost(), .,,,..");
+
+		//한글 처리  
+		request.setCharacterEncoding("utf-8");
+    response.setContentType("text/html;charset=utf-8");
+        
+    PrintWriter out = response.getWriter();
+        
+        //브라우저로 바로 출력 
+    out.println("<body bgcolor='yellow'>");
+    out.println("<h3>Life Cycle CallBack Method...</h3>");
+    out.println("<h4><b>Count :: "+ ++count + "</b></h4>");
+    out.println("</body>");
+       
+    out.close();
+	}
+}
+```
+> 즉 1, 2번은 Ready on 상태이므로 한번만 호출되고, 3번은 계속해서 호출
+
+### 해결방법
+
+#### init() 초기화
+
+```java
+package web.servlet.config;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+//Annotation이 없다. 2.5버전은 xml 기반이기 때문  
+public class GreetingServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String greet; //greet 변수에 들어가는 값을 service() 하기 전에 초기화 해야 한다.
+    
+  public GreetingServlet() {
+  	System.out.println("1 GreetingServlet 디폴트로 생성....");
+  }
+
+  @Override
+  public void init() throws ServletException {
+  	System.out.println("2 GreetingServlet 필드 초기화 ");
+  	greet = getInitParameter("GREET"); //초기에 설정한 name으로 파라미터 값 받아옴
+  	System.out.println("Greet Message :: " + greet);
+  }
+    
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doProcess(request, response);
+	}
+	
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//클라이언트 요청 시점에 호출...form 값 받아온다.
+		//한글처리  
+		request.setCharacterEncoding("utf-8");
+    response.setContentType("text/html;charset=utf-8");
+        
+     System.out.println("3 doProcess... 클라이언트 요청시 작동함   ");
+     String name = request.getParameter("name");
+        
+     PrintWriter out=response.getWriter();
+     out.println("<body><h3>" +name + ", " + greet + "</h3></body>");
+     //greet는 Ready on 상태에서 받아온 값이고 컨테이너 차원에서 설정한 정보, servlet 필드 초기화
+     //name은 클라이언트 요청시 받아온값이고, form값 받아서 출력한 
+        
+     out.close();
+	}
+}
+```
+>위 코드대로 작성하면 서버의 최초 요청할 때 `Ready on` 상태 부터 진행 한다. 
+>
+>따라서 최초 진행한 사람은 `delay`가 생길 수 있다.
+>
+>이를 **Lazy Loading** 이라고 한다.
+>
+>`Lazy Loading`을 **Pre Loading**으로 바꿔야 한다.
+
+<br/>
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <servlet>
+    <description>ServletConfig를 이용한 Servlet 객체 초기화</description>
+    <display-name>GreetingServlet</display-name>
+    <servlet-name>GreetingServlet</servlet-name>
+    <servlet-class>web.servlet.config.GreetingServlet</servlet-class>
+    <init-param>
+      <description></description>
+      <param-name>GREET</param-name>
+      <param-value>Welcome to the Jambery</param-value>
+    </init-param>
+    
+    <load-on-startup>1</load-on-startup> ////////Pre Loading 수정 부분!!!!!!!!
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GreetingServlet</servlet-name>
+    <url-pattern>/GS</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+> `xml` 을 수정
+
+```java
+@WebServlet(urlPatterns = {"/Life"}, loadOnStartup = 1)
+```
+> 4.0^ver `LifeCycle annotation` 수정
+
