@@ -1,7 +1,7 @@
 ---
 title: 🥜 [React] Lazy-Loading 알아보기
 date: 2023-10-26 18:24:00 +0800
-categories: [Study, Frontend]
+categories: [Frontend, React]
 tags: [React, lazy-loading]
 ---
 

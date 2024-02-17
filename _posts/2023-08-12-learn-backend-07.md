@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] FactoryMethod 패턴 & Spring DI
 date: 2023-08-12 20:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

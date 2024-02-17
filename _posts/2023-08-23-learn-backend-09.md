@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] Two Architecture Layer & Bean 설정문서 모듈화
 date: 2023-08-23 18:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 > 

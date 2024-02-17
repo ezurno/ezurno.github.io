@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] Pooling 기법 & Cookie, Session, MVC
 date: 2023-08-02 18:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

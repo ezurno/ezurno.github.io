@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] 페이지 이동과 Attribute, ResourceFactory
 date: 2023-07-24 18:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

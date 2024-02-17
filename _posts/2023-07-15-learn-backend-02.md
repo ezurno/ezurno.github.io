@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] Web Architecture & Servlet
 date: 2023-07-15 18:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

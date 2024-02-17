@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] Servlet-API 와 생명주기
 date: 2023-07-16 18:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

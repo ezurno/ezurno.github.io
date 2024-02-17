@@ -1,7 +1,7 @@
 ---
 title: 🥜 [JAVA] Backend 기초를 위한 JAVA 기본 다지기
 date: 2023-07-13 18:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA]
 ---
 

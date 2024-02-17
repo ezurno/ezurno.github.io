@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] AOP (+annotation) & Spring-Boot
 date: 2023-09-02 20:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

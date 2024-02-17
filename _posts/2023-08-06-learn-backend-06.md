@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] Filter 와 전반적인 통신 흐름
 date: 2023-08-05 20:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 

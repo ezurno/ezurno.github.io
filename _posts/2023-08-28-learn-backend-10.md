@@ -1,7 +1,7 @@
 ---
 title: 🥜 [Spring] File 업로드, 저장 & AOP
 date: 2023-08-28 20:30:00 +0800
-categories: [Study, Backend]
+categories: [Backend, Spring]
 tags: [Backend, JAVA, Spring]
 ---
 > Component는 인터페이스 기반의 여러 기능들이 있는 것을 말한다.
