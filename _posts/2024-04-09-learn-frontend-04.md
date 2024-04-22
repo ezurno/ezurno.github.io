@@ -1,7 +1,7 @@
 ---
 title: 🥜 [React] React.memo(), useCallback(), useMemo() 를 활용한 최적화를 해보자
 date: 2024-04-09 08:00:00 +0800
-categories: [Frontend, JavaScript]
+categories: [Frontend, React]
 tags: [JavaScript, 최적화]
 toc: true
 ---

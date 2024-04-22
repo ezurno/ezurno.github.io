@@ -1,8 +1,8 @@
 ---
-title: 🥜 [Frontend] Frontend 기술면접 (Javascript)
+title: 🥜 [JavaScript] Frontend 기술면접 (Javascript)
 date: 2024-04-21 08:00:00 +0800
 categories: [Frontend, JavaScript]
-tags: [JavaScript, 최적화]
+tags: [JavaScript, 기술면접]
 toc: true
 ---
 
